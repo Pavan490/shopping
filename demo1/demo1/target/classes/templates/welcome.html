@@ -1,0 +1,119 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Reset your password</title>
+    <style>
+        /* General resets */
+        body { margin:0; padding:0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; font-family: Arial, Helvetica, sans-serif; background-color:#f3f6f9; color:#333333; }
+        table { border-collapse: collapse; }
+        img { border:0; line-height:100%; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; height:auto; display:block; }
+
+        /* Container */
+        .email-wrap { width:100%; padding:24px 12px; }
+        .email-body { max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 6px 18px rgba(22, 32, 51, 0.08); }
+
+        /* Header */
+        .header { padding:24px; text-align:center; background: linear-gradient(135deg,#4f46e5 0%, #06b6d4 100%); color:white; }
+        .brand { font-size:20px; font-weight:700; letter-spacing:0.2px; }
+
+        /* Content */
+        .content { padding:28px 28px 24px; }
+        .title { font-size:20px; font-weight:700; margin:0 0 8px; color:#0f172a; }
+        .lead { font-size:15px; color:#475569; margin:0 0 18px; line-height:1.5; }
+        .note { font-size:13px; color:#64748b; margin-top:16px; }
+
+        /* Button */
+        .btn-wrap { text-align:center; margin:18px 0 8px; }
+        .btn {
+          display:inline-block;
+          padding:12px 22px;
+          border-radius:10px;
+          text-decoration:none;
+          font-weight:600;
+          font-size:15px;
+          color:#ffffff;
+          background-color:#0ea5a4;
+          border: 1px solid #0ea5a4;
+        }
+        .btn:active, .btn:visited { color:#fff; }
+
+        /* Footer */
+        .footer { padding:18px 24px; font-size:12px; color:#9ca3af; text-align:center; background:#fbfdff; }
+
+        /* Small screens */
+        @media (max-width:420px) {
+          .content { padding:18px 16px; }
+          .header { padding:18px; }
+          .title { font-size:18px; }
+        }
+    </style>
+</head>
+<body>
+<table class="email-wrap" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+        <td align="center">
+            <table class="email-body" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                <!-- Header -->
+                <tr>
+                    <td class="header" align="center" valign="middle">
+                        <!-- Replace with <img> if you have a logo -->
+                        <div class="brand" th:text="${companyName} ?: 'YourCompany'">YourCompany</div>
+                    </td>
+                </tr>
+
+                <!-- Body -->
+                <tr>
+                    <td class="content">
+                        <p class="title">Reset your password</p>
+                        <p class="lead">Hi <span th:text="${name} ?: 'there'">User</span>,</p>
+
+                        <p class="lead">
+                            We received a request to reset the password for your account.
+                            Click the button below to choose a new password. This link will expire in
+                            <strong th:text="${expiresIn} ?: '30 minutes'">30 minutes</strong>.
+                        </p>
+
+                        <div class="btn-wrap">
+                            <!-- Use th:href for Thymeleaf, or replace href with your generated link -->
+                            <a th:href="${resetUrl}" href="#" class="btn" target="_blank" rel="noopener">
+                                Reset password
+                            </a>
+                        </div>
+
+                        <p class="note">
+                            If the button doesn't work, copy and paste the following link into your browser:
+                            <br/>
+                            <a th:href="${resetUrl}" th:text="${resetUrl}" href="#" style="color:#0ea5a4; word-break:break-all;">https://...</a>
+                        </p>
+
+                        <hr style="border:0; border-top:1px solid #eef2f7; margin:20px 0;">
+
+                        <p style="font-size:13px; color:#64748b; line-height:1.5; margin:0;">
+                            Didn't request a password reset? No problem — you can safely ignore this email.
+                            For security, we recommend changing your password if you think someone else might have access to your account.
+                        </p>
+
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td class="footer">
+                        <div>
+                            © <span th:text="${year} ?: ${#dates.format(#dates.createNow(), 'yyyy')}">2025</span>
+                            <span th:text="${companyName} ?: 'YourCompany'">YourCompany</span>. All rights reserved.
+                        </div>
+                        <div style="margin-top:8px;">
+                            <a href="#" style="color:#9ca3af; text-decoration:underline;">Privacy</a> •
+                            <a href="#" style="color:#9ca3af; text-decoration:underline;">Support</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
