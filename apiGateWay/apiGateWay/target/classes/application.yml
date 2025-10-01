@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: apiGateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: demo1
+              uri: lb://demo1
+              predicates:
+                - Path=/auth/**
+            - id: product
+              uri: lb://product
+              predicates:
+                - Path=/product/**
+
+                - id: order-service
+                  uri: lb://order-service
+                  predicates:
+                    - Path=/orders/**
+
+                    - id: payment-service
+                      uri: lb://payment-service
+                      predicates:
+                        - Path=/payments/**
+          globalcors:
+            cors-configurations:
+              '[*]':
+                allowed-origins: "*"
+                allowed-methods: "*"
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
