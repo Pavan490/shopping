@@ -1,0 +1,11 @@
+package com.example.order_service.dto;
+
+import lombok.Data;
+
+@Data
+public class UserDto {
+    private Long id;
+    private String name;
+    private String mobile;
+    private String email;
+}
